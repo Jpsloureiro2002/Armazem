@@ -9,11 +9,7 @@ export class GuI{
         this.controlCam = {
             'cameraType' : 'Perspective'
         }
-        this.controloBox = {
-            'x' : 0,
-            'y' : 0,
-            'z' : 0,
-        }
+
 
         // call the render function
         this.step = 0;
@@ -44,30 +40,6 @@ export class GuI{
 
         this.cameraControl = this.gui.addFolder('Camera');
 
-        this.gui.add(this.controloBox, "x", -50000,50000).name("X").onChange(function(value){
-            obj.box1.setPositionX(value);
-        });
-        this.gui.add(this.controloBox, "y", -50000,50000).name("Y").onChange(function(value){
-            obj.box1.setPositionY(value);
-        });
-        this.gui.add(this.controloBox, "z", -50000,50000).name("Z").onChange(function(value){
-            obj.box1.setPositionZ(value);
-        });
-
-
-        //Camera Control
-        this.GUIcameraControlVar = this.cameraControl.add(this.controlCam, 'cameraType', ['Perspective', 'Orthographic','Track Robot']).name('Camera View').onChange(function(value) {
-            if (value === 'Orthographic') {
-                WebGl.camera = WebGl.cameraOrtho;
-                WebGl.controlsPointerLock.setCamera(WebGl.cameraOrtho);
-            } else if (value === 'Track Robot'){
-                WebGl.camera = WebGl.cameraTrack;
-            }else {
-                WebGl.camera = WebGl.cameraPerspective;
-                WebGl.controlsPointerLock.setCamera(WebGl.cameraPerspective);
-            }
-            updateCamera();
-        });
         
         this.controlFreeMovement = this.cameraControl.add(this.controls, 'freeMovement').name('Free Movement').onChange(function(value) {
             if (value) {
